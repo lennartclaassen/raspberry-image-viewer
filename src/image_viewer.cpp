@@ -46,21 +46,21 @@ void imageViewer::imageCallback(const sensor_msgs::ImageConstPtr& msg) {
 
 void imageViewer::showImage(Mat &img) {
     imshow(this->windowName, this->receivedFrame);
-    waitKey(1);
+    waitKey(10);
 }
 
 void imageViewer::loop() {
     while(ros::ok() && !this->imageReceived){
-        ROS_ERROR("No image received yet ...");
-        ros::Duration(0.5).sleep();
+        ROS_WARN("No image received yet ...");
         ros::spinOnce();
+        ros::Duration(0.2).sleep();
     }
 
     ROS_INFO("run");
 
     while(ros::ok()) {
-        this->showImage(this->receivedFrame);
         ros::spinOnce();
+        this->showImage(this->receivedFrame);
     }
 }
 
