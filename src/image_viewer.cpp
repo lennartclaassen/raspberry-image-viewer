@@ -12,7 +12,7 @@ imageViewer::imageViewer() {
     nh->param<int>("/raspberry_image_viewer/display_height", this->displayResolution.height, 480);
     nh->param<std::string>("/raspberry_image_viewer/image_topic", this->topicName, "/raspberry_image");
 
-    this->image_sub = this->it->subscribe(this->topicName, 1, &imageViewer::imageCallback, this);
+    this->image_sub = this->it->subscribe(this->topicName, 5, &imageViewer::imageCallback, this);
 
     this->imageReceived = false;
     this->windowName = "display";
@@ -56,6 +56,8 @@ void imageViewer::loop() {
         ros::spinOnce();
     }
 
+    ROS_INFO("run");
+
     while(ros::ok()) {
         this->showImage(this->receivedFrame);
         ros::spinOnce();
@@ -67,9 +69,5 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "raspberry_image_viewer");
     imageViewer viewer;
 
-
-    ROS_INFO("run");
-
-    viewer.setupDisplay();
     viewer.loop();
 }
