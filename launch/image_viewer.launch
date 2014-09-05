@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="raspberry_image_viewer" type="raspberry_image_viewer_node" name="raspberry_image_viewer" output="screen" >
+		<param name="display_width" type="int" value="848" />
+		<param name="display_height" type="int" value="480" />
+
+		<param name="image_topic" type="string" value="/raspberry_image" />
+	</node>
+</launch>
